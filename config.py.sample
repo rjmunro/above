@@ -1,0 +1,10 @@
+# Twitter credentials
+USERNAME = "[username]"
+PASSWORD = "[password]"
+
+# Location
+lat = [lat]
+lon = [lon]
+
+# Code from Yahoo URL - see http://weather.yahoo.com/forecast/UKXX0106_c.html
+YAHOOCODE = "[YahooCode]"

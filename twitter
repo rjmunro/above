@@ -4,12 +4,14 @@
 # Twitter Iridium flares and ISS flybys above Birmingham
 #
 # Copyright (c) 2009 Matthew Somerville. http://www.dracos.co.uk/
+#               With updates by Robert (Jamie) Munro http://arjam.net/
+
+from config import USERNAME, PASSWORD
 
 import urllib, urllib2, sys
 from datetime import datetime, timedelta
 
-from config import EMAIL, PASSWORD
-dir = sys.path[0] + '/'
+dir = sys.path[0] + '/data/'
 
 def main():
     soon = datetime.today() + timedelta(minutes=30)
@@ -40,7 +42,7 @@ def main():
 def twitter(line):
     line = line.encode('utf-8')
     x = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    x.add_password(None, 'http://twitter.com/statuses/', EMAIL, PASSWORD)
+    x.add_password(None, 'http://twitter.com/statuses/', USERNAME, PASSWORD)
     auth = urllib2.HTTPBasicAuthHandler(x)
     opener = urllib2.build_opener(auth)
     try:

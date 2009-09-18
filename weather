@@ -1,13 +1,18 @@
 #!/usr/local/bin/python
 #
 # Run hourly to fetch latest weather from Yahoo!
+#
+# Copyright (c) 2009 Matthew Somerville. http://www.dracos.co.uk/
+#               With updates by Robert (Jamie) Munro http://arjam.net/
 
+from config import YAHOOCODE
+
+import sys
 import urllib, re, time
 
-# Get the code for a different place from the Yahoo! web site or similar
-code = 'UKXX0018'
+dir = sys.path[0] + '/data/'
 
-weather = urllib.urlopen('http://weather.yahooapis.com/forecastrss?p=%s&u=c' % code).read()
+weather = urllib.urlopen('http://weather.yahooapis.com/forecastrss?p=%s&u=c' % YAHOOCODE).read()
 
 # visibility might be useful for someone - I don't use it
 # m = re.search('<yweather:atmosphere humidity="(\d*)"  visibility="([\d.]*)"  pressure="([\d.]*)"', weather)
@@ -24,4 +29,6 @@ clear = 'NO'
 if int(code) in [ 23, 24, 25, 29, 30, 44, 31, 32, 33, 34, 36 ]:
     clear = 'YES'
 
-print "%s\t%s\t%s\t%s" % (epoch, clear, text, code)
+fp = open(dir + 'weather.tsv', 'w')
+fp.write( "%s\t%s\t%s\t%s\n" % (epoch, clear, text, code))
+fp.close()

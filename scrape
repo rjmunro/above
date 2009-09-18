@@ -2,15 +2,16 @@
 #
 # Scraper for ISS and Iridium flare pages
 # Runs once a day.
+#
+# Copyright (c) 2009 Matthew Somerville. http://www.dracos.co.uk/
+#               With updates by Robert (Jamie) Munro http://arjam.net/
 
-# Change these co-ordinates for your location
-lat = 52.48
-lon = -1.90
+from config import lat,lon
 
 import urllib, re, time, sys
 from datetime import datetime
 
-dir = sys.path[0] + '/'
+dir = sys.path[0] + '/data/'
 
 iss = urllib.urlopen('http://www.heavens-above.com/PassSummary.aspx?satid=25544&lat=%f&lng=%f&alt=114&tz=GMT' % (lat, lon)).read()
 rows = re.findall('<tr class="(?:light|dark)row">\s*<td><a href="[^"]*">(.*?)</a></td>' + ('<td>\s*(.*?)\s*</td>' * 10), iss)
